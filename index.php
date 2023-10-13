@@ -16,8 +16,12 @@
 </div>
 
 <?php 
-require_once "src/view.php";
-$all_posts->show_all_posts();
+//require_once "src/view.php";
+require_once "src/router.php";
+//
+//echo $_SERVER['REQUEST_URI'];
+//echo $_SERVER['DOCUMENT_ROOT'] . '/index.php'
+	//$all_posts->show_all_posts();
 ?>
 </body>
 </html>

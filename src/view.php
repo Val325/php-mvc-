@@ -22,6 +22,14 @@ class View
             echo "</div>";            
         }
     }
+    public function show_id_posts($id){
+
+        $post = $this->controller->get_model()->get_db_post($id);
+        echo "<div class='post'>"; 
+        echo "<span>id: " . $post['id'] . " </span>";            
+        echo "<span>data: " . $post['data'] . "</span> </br>";
+        echo "</div>";            
+    }
 }
 
 $all_posts = new View($control, $post);

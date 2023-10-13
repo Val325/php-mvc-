@@ -18,8 +18,29 @@ class Model
         }
         
     }
-    public function get_db_post($sql){
-        $this->db->exec($sql);
+    public function get_db_post($id){
+
+        //sql code
+        $sql = "SELECT * FROM posts WHERE id = :id";
+        //data tables
+        //execute
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        //extract from db
+        if($statement->rowCount() > 0){
+            foreach ($statement as $row) {
+              $id_post = $row["id"];
+              $data = $row["data"];
+            }
+        }
+        if (!isset($id_post) && !isset($data)){
+            header("Location:/404.html");
+        }
+
+        $post = array("id"=>$id_post, "data"=>$data);
+        return $post;
+
     }
     public function get_db_all_posts(){
         $sql = "SELECT * FROM posts";
