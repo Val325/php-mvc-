@@ -18,6 +18,23 @@ class Model
         }
         
     }
+    public function save_db_post_by_id($id, $data_post){
+        $post_name = "post".$id;
+        echo "<br>"; 
+        echo "post_name = " . $post_name;
+        echo "<br>";
+        echo "data_post = " . $data_post;
+        $sql = "INSERT INTO $post_name (data) VALUES (:datapost)";
+        echo $sql;
+        if (isset($data_post) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $data_post)) {
+            $statement = $this->db->prepare($sql);
+            
+            $statement->bindValue(":datapost", $data_post);
+            $statement->execute();
+
+        }
+        
+    }
     public function get_db_post($id){
 
         //sql code
@@ -35,7 +52,10 @@ class Model
             }
         }
         if (!isset($id_post) && !isset($data)){
-            header("Location:/404.html");
+            //header("Location:/404.html");
+            //http_response_code(404); // Set the HTTP response code to 404
+            //header("Location: /src/404.html"); // Redirect to your custom 404 page
+            //exit; // Stop executing the current script
         }
 
         $post = array("id"=>$id_post, "data"=>$data);
@@ -56,6 +76,38 @@ class Model
             array_push($posts_sql_post, ["post"=>$post]);
         }
         return $posts_sql_post;
+    }
+    public function create_table_subpost($id){
+        $post_name = "post".$id; 
+
+        $sql = "CREATE TABLE IF NOT EXISTS :namepost (id INTEGER AUTO_INCREMENT PRIMARY KEY, data varchar(256))";
+
+        if (preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $post_name)) {
+            $sql = "CREATE TABLE IF NOT EXISTS $post_name (id INT AUTO_INCREMENT PRIMARY KEY, data varchar(256))";
+            $statement = $this->db->prepare($sql);
+            $statement->execute();
+        }
+    }
+    public function get_db_subpost($id){
+        $post_name = "post" . $id;
+        //sql code
+        $sql = "SELECT * FROM :namepost";
+        //data tables
+        //execute
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(":namepost", $id);
+        $statement->execute();
+        //extract from db
+        if($statement->rowCount() > 0){
+            foreach ($statement as $row) {
+              $id_post = $row["id"];
+              $data = $row["data"];
+            }
+        }
+
+        $post = array("id"=>$id_post, "data"=>$data);
+        return $post;
+
     }
     public function close(){
         $this->db = null;

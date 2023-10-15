@@ -16,20 +16,40 @@ class View
         $amount_posts = count($posts);
         for($i=0; $i < $amount_posts; $i++)
         {
-            echo "<div class='post'>"; 
+            echo "<div class='post-main'>"; 
+
+            echo "<a href=/" . $i + 1 . "> <input type='button' <div class='btn' value='Go to Post' /></a>";
+            echo "<div class='data_post'>";
             echo "<span>id: " . $posts[$i]['post'][0]['id'] . " </span>";            
             echo "<span>data: " . $posts[$i]['post'][0]['data'] . "</span> </br>";
+            echo "</div>";
             echo "</div>";            
         }
     }
     public function show_id_posts($id){
 
         $post = $this->controller->get_model()->get_db_post($id);
-        echo "<div class='post'>"; 
+        echo "<div class='post-sub'>"; 
         echo "<span>id: " . $post['id'] . " </span>";            
         echo "<span>data: " . $post['data'] . "</span> </br>";
         echo "</div>";            
     }
+    public function show_all_posts_by_id($id){
+
+        $posts = $this->controller->get_model()->get_db_all_posts();
+        $amount_posts = count($posts);
+        for($i=0; $i < $amount_posts; $i++)
+        {
+            echo "<div class='post-main'>"; 
+
+            echo "<a href=/" . $i + 1 . "> <input type='button' <div class='btn' value='Go to Post' /></a>";
+            echo "<div class='data_post'>";
+            echo "<span>id: " . $posts[$i]['post'][0]['id'] . " </span>";            
+            echo "<span>data: " . $posts[$i]['post'][0]['data'] . "</span> </br>";
+            echo "</div>";
+            echo "</div>";            
+        }
+    }    
 }
 
 $all_posts = new View($control, $post);
