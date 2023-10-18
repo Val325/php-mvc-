@@ -14,7 +14,7 @@
 
 #require_once "src/view/form.php";
 require_once "src/router.php";
-
+echo $_SERVER['DOCUMENT_ROOT'] ."/src/uploads/";
 ?>
 </body>
 </html>
