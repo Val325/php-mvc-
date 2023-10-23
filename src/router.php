@@ -25,9 +25,11 @@ switch($_SERVER['REQUEST_URI'])
         break;
     case "/login":
         login();
+        require_once "view/login.php"; 
         break;    
     case "/registration":
         registration();
+        require_once "view/registration.php"; 
         break;  
     case preg_match('/^[0-9]*$/',$_SERVER['REQUEST_URI']):
         require_once "view/form.php"; 

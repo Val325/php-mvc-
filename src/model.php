@@ -7,6 +7,48 @@ class Model
         $this->db = new PDO("mysql:host=localhost;dbname=Posts", "root", "");
         $this->db->exec('CREATE DATABASE IF NOT EXISTS Posts');
     }
+
+
+    public function login($login,$password)
+    {
+        //$sql
+        // code...
+        $sql = "SELECT * FROM users WHERE login = :login";
+
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(":login", $login);
+        $statement->execute();
+        if($statement->rowCount() > 0){
+            foreach ($statement as $row) {
+              $id_user = $row["id"];
+              $login_user = $row["login"];
+              $password_user = $row["password"];
+            }
+        }
+        if ($login == $login_user && password_verify($password, $password_user)) {
+            echo 'Password is valid!';
+        } else {
+            echo 'Invalid password.';
+        }
+    }
+    public function register($login,$password)
+    {
+        //$sql
+        // code...
+        //
+        if (preg_match('/^[a-zA-Z0-9_][a-zA-Z0-9_]*$/', $login)) 
+        {
+            $password = password_hash($password,PASSWORD_DEFAULT);
+            echo "hash: ".$password;
+            $sql = "INSERT INTO users (login,password) VALUES (:login,:password)";
+            $statement = $this->db->prepare($sql);
+            
+            $statement->bindValue(":login", $login);
+            $statement->bindValue(":password", $password);
+            $statement->execute();
+
+        }
+    }
     public function create_table($sql){
         //make database
         $this->db->exec($sql);
@@ -16,6 +58,7 @@ class Model
         if (isset($_POST["post"])){
             $name_file = generateRandomString(16);
             $target_file = download_image($name_file);
+            $target_file = substr($target_file,65);
             //echo "file download: ".$target_file; 
             $statement = $this->db->prepare($sql);
             //:pathimg
@@ -146,11 +189,19 @@ class Model
 
 $post = new Model();
 $post->create_table("CREATE TABLE IF NOT EXISTS posts (id INTEGER AUTO_INCREMENT PRIMARY KEY, data varchar(256), pathimage varchar(256))");
+$post->create_table("CREATE TABLE IF NOT EXISTS users (id INTEGER AUTO_INCREMENT PRIMARY KEY, login varchar(256), password varchar(256))");
+
 if (isset($_SERVER['HTTP_REFERER']) && substr($_SERVER['HTTP_REFERER'],16) == "/") {
     $post->save_db_post("INSERT INTO posts (data,pathimage) VALUES (:datapost,:pathimg)");
 }
 
+if (isset($_POST["login"]) && isset($_POST["psw"])) {
+    $post->register($_POST["login"],$_POST["psw"]);
+}
 
+if (isset($_POST["login_log"]) && isset($_POST["psw_log"])) {
+    $post->login($_POST["login_log"],$_POST["psw_log"]);
+}
 
 ?>
 <script type = "text/javascript">
