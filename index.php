@@ -6,13 +6,19 @@
 	<title>Main</title>
 </head>
 <body>
-	<h1>Notes</h1>
+	<h1>
+		Notes 
+		<span class="register">Register</span> 
+		<span class="login_nav">Login</span> 
+		<span class="exit_nav">Exit</span>
+	</h1>
 <h3>Note input data</h3>
 
 
 <?php 
 require_once "src/router.php";
-echo substr($_SERVER['HTTP_REFERER'],16);
+
+//header("Location:/");
 ?>
 </body>
 </html>

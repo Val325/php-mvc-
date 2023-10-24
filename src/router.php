@@ -31,12 +31,13 @@ switch($_SERVER['REQUEST_URI'])
         registration();
         require_once "view/registration.php"; 
         break;  
-    case preg_match('/^[0-9]*$/',$_SERVER['REQUEST_URI']):
+    case is_numeric(substr($_SERVER['REQUEST_URI'],1)):
         require_once "view/form.php"; 
+        $all_posts->show_id_posts(substr($_SERVER['REQUEST_URI'],1));
         $all_posts->show_all_posts_by_id(substr($_SERVER['REQUEST_URI'],1));
         break;    
     default: 
-        include 'view/post.php';
+        include '404.html';
         break;
 }
 

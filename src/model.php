@@ -72,6 +72,7 @@ class Model
     public function save_db_post_by_id($id, $data_post){
         $post_name = "post".$id;
 
+       
         echo "<br>"; 
         echo "post_name = " . $post_name;
         echo "<br>";
@@ -84,6 +85,7 @@ class Model
         echo "target_file: " . substr($target_file,65);
         $target_file = substr($target_file,65);
         echo "<br>"; 
+     
         //echo $sql;
         if (isset($data_post) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $data_post)) {
             $sql = "INSERT INTO $post_name (data,pathimage) VALUES (:datapost,:pathimg)";
@@ -177,9 +179,7 @@ class Model
             
             //$post = array("id" => $id_post, "data" => $data);
             return $posts_sql_post;
-        } else {
-            // Handle an invalid table name here (e.g., log an error or return an error response)
-            return null;
+        
         }
     }
     public function close(){
@@ -205,7 +205,23 @@ if (isset($_POST["login_log"]) && isset($_POST["psw_log"])) {
 
 ?>
 <script type = "text/javascript">
+    let register = document.querySelector('.register');
+    let login = document.querySelector('.login_nav');
+    let exit = document.querySelector('.exit_nav');
+
     if(document.location.href.indexOf('src/model.php') > -1) {
-        window.location = "/index.php"; 
+        //window.location = "/index.php"; 
     }
+
+    register.addEventListener('click', function() {
+        window.location = "/registration";
+    });
+
+    login.addEventListener('click', function() {
+        window.location = "/login";
+    });
+
+    exit.addEventListener('click', function() {
+        window.location = "/exit";
+    });
 </script>

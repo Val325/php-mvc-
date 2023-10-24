@@ -22,8 +22,8 @@ class View
             echo "<div class='data_post'>";
             echo "<span>id: " . $posts[$i]['post'][0]['id'] . " </span>";            
             echo "<span>data: " . $posts[$i]['post'][0]['data'] . "</span> </br>";
-            //print_r($posts[$i]);
-            if (file_exists($_SERVER["DOCUMENT_ROOT"] .'/src/'. $posts[$i]['post'][0]['pathimage'])){
+            if (file_exists($_SERVER["DOCUMENT_ROOT"] .'/src/'. $posts[$i]['post'][0]['pathimage']) &&
+                !is_dir($_SERVER["DOCUMENT_ROOT"] .'/src/'. $posts[$i]['post'][0]['pathimage'])){
                 echo "<a href='src/".$posts[$i]['post'][0]['pathimage']."' >";
                 echo "<img src='src/".$posts[$i]['post'][0]['pathimage']."' width='200' height='200' />";
                 echo "</a>";
@@ -39,10 +39,10 @@ class View
         echo "<span>id: " . $post['id'] . " </span>";            
         echo "<span>data: " . $post['data'] . "</span> </br>";
         //print_r($posts);
+
             echo "<a href='src/".$post['pathimage']."' >";
             echo "<img src='src/".$post['pathimage']."' width='200' height='200' />";
             echo "</a>";
-
         echo "</div>";            
     }
     public function show_all_posts_by_id($id){
@@ -54,12 +54,14 @@ class View
             {
                 echo "<div class='post-main'>"; 
                 echo "<div class='data_post'>";
-                //print_r($posts[$i]);
+                print_r($posts[$i]);
                 echo "<span>id: " . $posts[$i]['post'][0]['id'] . " </span>";            
                 echo "<span>data: " . $posts[$i]['post'][0]['data'] . "</span> </br>";
-                echo "<a href='src/".$posts[$i]['post'][0]['pathimage']."' >";
-                echo "<img src='src/".$posts[$i]['post'][0]['pathimage']."' width='200' height='200' />";
-                echo "</a>";
+
+
+                    echo "<a href='src/".$posts[$i]['post'][0]['pathimage']."' >";
+                    echo "<img src='src/".$posts[$i]['post'][0]['pathimage']."' width='200' height='200' />";
+                    echo "</a>";
 
                 echo "</div>";
                 echo "</div>";                 
