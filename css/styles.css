@@ -10,6 +10,7 @@
     border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
 .post-main {
     display: flex;
     flex-direction: column-reverse;
@@ -104,4 +105,19 @@ form > input[type="submit"]:active{
 }
 .post {
 
+}
+.login_form{
+    display: block !important;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8%;
+}
+.register_form{
+    display: block !important;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8%;
+}
+h2 {
+    text-align: center;
 }

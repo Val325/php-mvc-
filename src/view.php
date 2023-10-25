@@ -54,7 +54,7 @@ class View
             {
                 echo "<div class='post-main'>"; 
                 echo "<div class='data_post'>";
-                print_r($posts[$i]);
+                //print_r($posts[$i]);
                 echo "<span>id: " . $posts[$i]['post'][0]['id'] . " </span>";            
                 echo "<span>data: " . $posts[$i]['post'][0]['data'] . "</span> </br>";
 

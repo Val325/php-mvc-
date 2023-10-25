@@ -87,7 +87,9 @@ class Model
         echo "<br>"; 
      
         //echo $sql;
-        if (isset($data_post) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $data_post)) {
+        if (isset($post_name) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $post_name)) {
+            echo $post_name;
+            $this->create_table("CREATE TABLE IF NOT EXISTS $post_name (id INTEGER AUTO_INCREMENT PRIMARY KEY, data varchar(256), pathimage varchar(256))");
             $sql = "INSERT INTO $post_name (data,pathimage) VALUES (:datapost,:pathimg)";
             $statement = $this->db->prepare($sql);
             
@@ -155,6 +157,7 @@ class Model
     }
     public function get_db_subpost($id){
         $post_name = "post" . $id;
+        //$post_name = $id;
         $posts_sql_post = array();
         // Validate and sanitize the table name
         if (preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $post_name)) {
@@ -211,6 +214,9 @@ if (isset($_POST["login_log"]) && isset($_POST["psw_log"])) {
 
     if(document.location.href.indexOf('src/model.php') > -1) {
         //window.location = "/index.php"; 
+    }
+    if(document.location.href.indexOf('/pma/') > -1) {
+        window.location = "/pma/index.php"; 
     }
 
     register.addEventListener('click', function() {

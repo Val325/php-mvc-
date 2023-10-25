@@ -32,7 +32,8 @@ switch($_SERVER['REQUEST_URI'])
         require_once "view/registration.php"; 
         break;  
     case is_numeric(substr($_SERVER['REQUEST_URI'],1)):
-        require_once "view/form.php"; 
+        require_once "view/formsubpost.php"; 
+        echo substr($_SERVER['REQUEST_URI'],1);
         $all_posts->show_id_posts(substr($_SERVER['REQUEST_URI'],1));
         $all_posts->show_all_posts_by_id(substr($_SERVER['REQUEST_URI'],1));
         break;    

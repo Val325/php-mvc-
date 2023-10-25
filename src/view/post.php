@@ -1,8 +1,8 @@
 <?php 
 require_once "formsubpost.php";
-//require_once $_SERVER['DOCUMENT_ROOT'] . "/src/view.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/src/view.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/src/model.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/src/functions.php";
+//require_once $_SERVER['DOCUMENT_ROOT'] . "/src/functions.php";
 $post_id = substr($_SERVER['REQUEST_URI'],1);
 echo $post_id;
 if (isset($_POST["post"])){
