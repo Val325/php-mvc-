@@ -31,6 +31,9 @@ switch($_SERVER['REQUEST_URI'])
         registration();
         require_once "view/registration.php"; 
         break;  
+    case "/exit":
+        session_destroy();
+        break;    
     case is_numeric(substr($_SERVER['REQUEST_URI'],1)):
         require_once "view/formsubpost.php"; 
         echo substr($_SERVER['REQUEST_URI'],1);

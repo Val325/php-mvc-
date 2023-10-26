@@ -1,4 +1,8 @@
 <?php
+
+if(!isset($_SESSION)){
+ session_start();
+}
 require_once "functions.php";
 class Model
 {
@@ -27,6 +31,8 @@ class Model
         }
         if ($login == $login_user && password_verify($password, $password_user)) {
             echo 'Password is valid!';
+            $_SESSION["user_name"] = $login_user;
+            echo $_SESSION["user_name"];
         } else {
             echo 'Invalid password.';
         }
@@ -210,7 +216,7 @@ if (isset($_POST["login_log"]) && isset($_POST["psw_log"])) {
 <script type = "text/javascript">
     let register = document.querySelector('.register');
     let login = document.querySelector('.login_nav');
-    let exit = document.querySelector('.exit_nav');
+
 
     if(document.location.href.indexOf('src/model.php') > -1) {
         //window.location = "/index.php"; 
@@ -227,7 +233,5 @@ if (isset($_POST["login_log"]) && isset($_POST["psw_log"])) {
         window.location = "/login";
     });
 
-    exit.addEventListener('click', function() {
-        window.location = "/exit";
-    });
+
 </script>
