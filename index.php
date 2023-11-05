@@ -12,6 +12,7 @@ session_start();
 	<h1>
 		Notes 
 		<?php
+
 			if (isset($_SESSION["user_name"]) && $_SESSION["user_name"]) {
 				echo $_SESSION["user_name"];
 				echo "<span class='exit_nav'> Exit </span>";

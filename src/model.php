@@ -169,11 +169,17 @@ class Model
         if (preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $post_name)) {
             // Construct the SQL query with the sanitized table name
             $sql = "SELECT * FROM " . $post_name;
-            
+
+	    try {
             // Execute the query
             $statement = $this->db->prepare($sql);
             $statement->execute();
+	    }
 
+	    //catch exception
+	    catch(Exception $e) {
+  	         echo 'No posts ';
+	    }
             
             if ($statement->rowCount() > 0) {
                 foreach ($statement as $row) {
