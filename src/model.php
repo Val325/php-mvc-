@@ -225,7 +225,7 @@ if (isset($_POST["login_log"]) && isset($_POST["psw_log"])) {
 
 
     if(document.location.href.indexOf('src/model.php') > -1) {
-        //window.location = "/index.php"; 
+        window.location = "/"; 
     }
     if(document.location.href.indexOf('/pma/') > -1) {
         window.location = "/pma/index.php"; 
